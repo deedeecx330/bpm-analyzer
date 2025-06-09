@@ -2,7 +2,10 @@ import audio
 import FreeSimpleGUI as fsg
 import os
 
+# Global table for data
 DATA = []
+
+# Set the theme and layout
 fsg.theme('DarkGrey11')
 layout = [
     [fsg.Button('Browse Files'), fsg.Button('Browse Folder')],
@@ -10,6 +13,7 @@ layout = [
     [fsg.Text('', key='-TEXT-', expand_x=True, justification='center')]
 ]
 
+# Workaround because TK does not have a built-in multi-file chooser
 def getFilesMultiple():
     return(fsg.popup_get_file('Select Files For Analysis', multiple_files=True, title='Browse Files'))
 
@@ -24,6 +28,7 @@ def drawGUI():
             break
         elif event == 'Browse Files':
             filesFunc = getFilesMultiple()
+            # Check if user clicked Close or Cancel
             if not isinstance(filesFunc, type(None)):
                 files = [f for f in filesFunc.split(';') if os.path.isfile(f)]
                 filesNum = len(files)
@@ -35,6 +40,7 @@ def drawGUI():
                     DATA.append([fileBaseName, 'Analyzing...'])
                     window['-TABLE-'].update(values=DATA)
                     window.refresh()
+                    # Do not bother with files which are not audio
                     if audio.isAudioFile(file):
                         DATA.pop()
                         DATA.append([fileBaseName, audio.getTempo(file)])
@@ -47,10 +53,14 @@ def drawGUI():
                 fileProcessed = 0
         elif event == 'Browse Folder':
             directory = getDirectory()
+            # Check if user clicked Close or Cancel
             if not isinstance(directory, type(None)):
+                # Check if the supplied path is even a directory
                 if not os.path.isdir(directory):
+                    # Workaround to keep output uniform
                     fsg.popup_ok("Finished analyzing 0 files", no_titlebar=True)
                 else:
+                    # Double-check if files are valid
                     files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
                     filesNum = len(files)
                     fileProcessed = 0
@@ -61,6 +71,7 @@ def drawGUI():
                         DATA.append([fileBaseName, 'Analyzing...'])
                         window['-TABLE-'].update(values=DATA)
                         window.refresh()
+                        # Do not bother with files which are not audio
                         if audio.isAudioFile(file):
                             DATA.pop()
                             DATA.append([fileBaseName, audio.getTempo(file)])
