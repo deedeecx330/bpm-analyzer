@@ -14,4 +14,4 @@ To install them, run
 pip3 install essentia librosa FreeSimpleGUI python-magic
 ```
 
-* Essentia will not build with Python > 3.11, as the built-in Imp library was deprecated
+* As of the time of writing, Essentia will not build with Python > 3.11, as the built-in Imp library was deprecated
