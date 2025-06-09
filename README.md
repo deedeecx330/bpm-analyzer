@@ -8,7 +8,7 @@ If the confidence level is too low, it will throw a wild guess using the simpler
 
 # Installation
 To run the application, you need Python with Tkinter (install via distribution package manager) and a couple of other modules, namely Essentia*, Python-Magic, Librosa and FreeSimpleGUI.
-To install them, run
+To install them, run:
 
 ```
 pip3 install essentia librosa FreeSimpleGUI python-magic
