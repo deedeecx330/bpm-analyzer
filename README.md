@@ -1,10 +1,8 @@
 # bpm-analyzer
-Graphical BPM Analyzer
+Graphical BPM and song key analyzer
 
 # Overview
-This is a graphical BPM Analyzer utilizing FreeSimpleGUI, Essentia and Librosa.
-When running analysis, it will try to use Essentia for the initial analysis;
-If the confidence level is too low, it will throw a wild guess using the simpler Librosa module.
+This is a graphical BPM and song key analyzer utilizing FreeSimpleGUI, Essentia and Librosa.
 
 # Installation
 To run the application, you need Python with Tkinter (install via distribution package manager) and a couple of other modules, namely Essentia*, Python-Magic, Librosa and FreeSimpleGUI.
