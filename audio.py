@@ -15,5 +15,5 @@ def getKey(AudioFile):
 def getTempo(AudioFile):
     audio = ess.MonoLoader(filename=AudioFile)()
     rhythmExtractor = ess.RhythmExtractor2013(method="multifeature")
-    bpm, beats, beatsConfidence, _, beatsIntervals = rhythmExtractor(audio)
+    bpm, *_ = rhythmExtractor(audio)
     return(round(bpm))
